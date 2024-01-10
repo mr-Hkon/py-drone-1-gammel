@@ -8,7 +8,7 @@ import cv2
 
 # i ama testing
 
-
+#ein komentar
 somethhing.idk()  if equals minecfraft {]
 sadfaskdfasfd
 }
