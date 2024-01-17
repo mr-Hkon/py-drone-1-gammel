@@ -3,7 +3,6 @@ import cv2
 import time
 import keyboard
 
-
 test = Tello()
 
 test.connect()
@@ -19,19 +18,21 @@ test.speed = 0
 print(test.get_battery())
 
 
+async def screen():
+    while True:
+        read_frame = test.get_frame_read()
+        myFrame = read_frame.frame
+        img = cv2.resize(myFrame, (640, 480))
+
+        cv2.imshow("MyResult", img)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+
 while True:
+    screen()
 
-    read_frame = test.get_frame_read()
-    myFrame = read_frame.frame
-    img = cv2.resize(myFrame, (640, 480))
-
-    cv2.imshow("MyResult", img)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        test.takeoff()
-        test.land()
-        time.sleep(3)
-        break
 
     if keyboard.is_pressed('down arrow'):
         test.land()
@@ -42,6 +43,17 @@ while True:
         test.takeoff()
         print("up pressed")
         time.sleep(0.5)
+        print("trykk w")
 
     if keyboard.is_pressed('w'):
-        test.move_forward(5)
+        print("trykka w")
+        test.move_forward(50)
+        print("gjekk framover")
+
+    if keyboard.is_pressed('s'):
+        print("trykka s")
+        test.move_back(50)
+        print("gjekk bakover")
+
+
+
