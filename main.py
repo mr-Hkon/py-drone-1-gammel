@@ -1,13 +1,13 @@
 from djitellopy import Tello
 import cv2
 import time
-import numpy as np
+import keyboard
 
 
 test = Tello()
 
 test.connect()
-time.sleep(3)
+time.sleep(2)
 test.streamon()
 
 test.for_back_velocity = 0
@@ -32,3 +32,16 @@ while True:
         test.land()
         time.sleep(3)
         break
+
+    if keyboard.is_pressed('down arrow'):
+        test.land()
+        print("down pressed")
+        time.sleep(0.5)
+
+    if keyboard.is_pressed('up arrow'):
+        test.takeoff()
+        print("up pressed")
+        time.sleep(0.5)
+
+    if keyboard.is_pressed('w'):
+        test.move_forward(5)
