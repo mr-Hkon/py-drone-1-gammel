@@ -4,6 +4,10 @@ import time
 import keyboard
 import os
 
+# import openai
+
+# openai.api_key = ''
+
 test = Tello()
 
 test.connect()
@@ -29,10 +33,13 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+
+
     if keyboard.is_pressed('down arrow'):
         if height == 10:
             test.land()
             height = 0
+            break
         elif height > 19:
             test.move_down(50)
             height -= 10
@@ -47,7 +54,7 @@ while True:
         if height == 0:
             test.takeoff()
             height = 10
-            os.system('clear')
+            os.system('cls')
             print("klar")
         elif height > 9:
             test.move_up(50)
@@ -61,21 +68,26 @@ while True:
         print("trykk w")'''
 
     if keyboard.is_pressed('w'):
-        print("trykka w")
+        # print("trykka w")
         test.move_forward(50)
-        print("gjekk framover")
+        read_frame = test.get_frame_read()
+        myFrame = read_frame.frame
+        img = cv2.resize(myFrame, (1280, 960))
+
+        cv2.imshow("MyResult", img)
+        # print("gjekk framover")
     if keyboard.is_pressed('s'):
-        print("trykka s")
+        # print("trykka s")
         test.move_back(50)
-        print("gjekk bakover")
+        # print("gjekk bakover")
     if keyboard.is_pressed('a'):
-        print("trykka a")
+        # print("trykka a")
         test.move_left(50)
-        print("gjekk venstre")
+        # print("gjekk venstre")
     if keyboard.is_pressed('d'):
-        print("trykka d")
+        # print("trykka d")
         test.move_right(50)
-        print("gjekk høyre")
+        # print("gjekk høyre")
 
     '''rotation controlls'''
     if keyboard.is_pressed('left arrow'):
